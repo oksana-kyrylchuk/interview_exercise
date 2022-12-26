@@ -1,11 +1,11 @@
-import React from "react";
+import React, {FC} from "react";
+import {UseUsersList} from "./pages/components/users-list/use-users-list";
+import {UseUserDetails} from "./pages/components/user-details/use-user-details";
+import './App.scss';
 
-const App: React.FC = (): React.ReactElement => {
-  return (
-    <div className="App">
-        Users list
+export const App: FC = () => (
+    <div className="app">
+        <UseUsersList/>
+        <UseUserDetails/>
     </div>
-  );
-}
-
-export default App;
+)
