@@ -20,3 +20,7 @@ export const fetchUsers = () => async (dispatch: AppDispatch) => {
     dispatch(userActions.userFetchingError(getErrorMessage(e)));
   }
 };
+
+export const setDetails = (id: number) => (dispatch: AppDispatch) => {
+  dispatch(userActions.setDetails(id));
+};

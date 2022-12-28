@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IUser } from '../../models/IUser';
 
-interface UsersState {
+export interface UsersState {
   usersList: IUser[];
   userDetails: IUser | null;
   isLoading: boolean;
