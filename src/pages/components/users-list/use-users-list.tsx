@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
-import { fetchUsers } from '../../../store/reducers/user-actions';
-import { userActions } from '../../../store/reducers/user-slice';
+import { fetchUsers, setDetails } from '../../../store/reducers/user-actions';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { UsersList } from './users-list';
 
@@ -14,7 +13,7 @@ export const UseUsersList = () => {
     dispatch(fetchUsers());
   }, [dispatch]);
 
-  const showUserDetails = (id: number) => dispatch(userActions.setDetails(id));
+  const showUserDetails = (id: number) => dispatch(setDetails(id));
 
   return (
     <>

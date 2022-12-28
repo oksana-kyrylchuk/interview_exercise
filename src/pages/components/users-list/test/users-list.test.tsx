@@ -1,6 +1,5 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { IUser } from '../../../../models/IUser';
-import { UserItem } from '../../user-item/user-item';
 import { UsersList } from '../users-list';
 
 const usersListMock: IUser[] = [
@@ -10,12 +9,17 @@ const usersListMock: IUser[] = [
     username: 'Johnny',
     email: 'john.doe@gmail.com',
   },
+  {
+    id: 2,
+    name: 'Kate Blanket',
+    username: 'Katty',
+    email: 'kate94@gmail.com',
+  },
 ];
-test('renders data correctly', () => {
+
+test('renders list of 2 users', () => {
   render(<UsersList users={usersListMock} showUserDetails={jest.fn} />);
 
-  const item = (
-    <UserItem user={usersListMock[0]} handleClick={jest.fn} />
-  ) as unknown as HTMLElement;
-  expect(item).toBeInTheDocument();
+  const list = screen.getAllByTestId('user-item');
+  expect(list.length).toEqual(2);
 });

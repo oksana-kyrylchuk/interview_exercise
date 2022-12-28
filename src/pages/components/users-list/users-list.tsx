@@ -7,7 +7,7 @@ interface UserListProps {
   showUserDetails: (id: number) => void;
 }
 export const UsersList: FC<UserListProps> = ({ users, showUserDetails }) => (
-  <div className="users__list">
+  <div className="users__list" data-test-id="user-list">
     <h4>List of users</h4>
     {users.map((user) => (
       <UserItem key={user.id} user={user} handleClick={showUserDetails} />
