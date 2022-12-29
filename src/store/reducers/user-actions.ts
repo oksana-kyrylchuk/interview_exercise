@@ -3,7 +3,7 @@ import { IUser } from '../../models/IUser';
 import { AppDispatch } from '../index';
 import { userActions } from './user-slice';
 
-const getErrorMessage = (error: unknown) => {
+export const getErrorMessage = (error: unknown) => {
   if (error instanceof Error) {
     return error.message;
   }

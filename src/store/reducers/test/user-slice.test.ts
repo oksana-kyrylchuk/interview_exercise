@@ -1,5 +1,6 @@
 import { userReducer, UsersState, userActions } from '../user-slice';
-import { IUser } from '../../../models/IUser';
+import { usersListMock } from '../../test/mocks/mockData';
+
 const initialState = {
   usersList: [],
   userDetails: null,
@@ -7,20 +8,6 @@ const initialState = {
   error: '',
 };
 
-const usersList: IUser[] = [
-  {
-    id: 1,
-    name: 'John Doe',
-    username: 'Johnny',
-    email: 'john.doe@gmail.com',
-  },
-  {
-    id: 2,
-    name: 'Kate Blanket',
-    username: 'Katty',
-    email: 'kate94@gmail.com',
-  },
-];
 test('return the initial state', () => {
   expect(userReducer(undefined, { type: undefined })).toEqual(initialState);
 });
@@ -28,9 +15,9 @@ test('return the initial state', () => {
 test('handle setting user details', () => {
   const previousState: UsersState = {
     ...initialState,
-    usersList,
+    usersList: usersListMock,
   };
-
+  const action = userActions.setDetails(2);
   const expected = {
     ...previousState,
     userDetails: {
@@ -41,9 +28,7 @@ test('handle setting user details', () => {
     },
   };
 
-  expect(userReducer(previousState, userActions.setDetails(2))).toEqual(
-    expected,
-  );
+  expect(userReducer(previousState, action)).toEqual(expected);
 });
 
 test('handle loading while users data fetching', () => {
@@ -51,15 +36,13 @@ test('handle loading while users data fetching', () => {
     ...initialState,
     isLoading: false,
   };
-
+  const action = userActions.userFetching();
   const expected = {
     ...previousState,
     isLoading: true,
   };
 
-  expect(userReducer(previousState, userActions.userFetching())).toEqual(
-    expected,
-  );
+  expect(userReducer(previousState, action)).toEqual(expected);
 });
 
 test('handle users data fetching success', () => {
@@ -67,15 +50,13 @@ test('handle users data fetching success', () => {
     ...initialState,
     usersList: [],
   };
-
+  const action = userActions.userFetchingSuccess(usersListMock);
   const expected = {
     ...previousState,
-    usersList,
+    usersList: usersListMock,
   };
 
-  expect(
-    userReducer(previousState, userActions.userFetchingSuccess(usersList)),
-  ).toEqual(expected);
+  expect(userReducer(previousState, action)).toEqual(expected);
 });
 
 test('handle users data fetching error', () => {
@@ -84,13 +65,11 @@ test('handle users data fetching error', () => {
     ...initialState,
     error: '',
   };
-
+  const action = userActions.userFetchingError(errorMessage);
   const expected = {
     ...previousState,
     error: errorMessage,
   };
 
-  expect(
-    userReducer(previousState, userActions.userFetchingError(errorMessage)),
-  ).toEqual(expected);
+  expect(userReducer(previousState, action)).toEqual(expected);
 });

@@ -1,13 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { IUser } from '../../../../models/IUser';
 import { UserItem } from '../user-item';
+import { userMock } from '../../../../store/test/mocks/mockData';
 
-const userMock: IUser = {
-  id: 1,
-  name: 'John Doe',
-  username: 'Johnny',
-  email: 'john.doe@gmail.com',
-};
 test('renders name correctly', () => {
   render(<UserItem user={userMock} handleClick={jest.fn()} />);
 
@@ -15,7 +9,7 @@ test('renders name correctly', () => {
   expect(name).toBeInTheDocument();
 });
 
-test('onCLick should handleClick with id', () => {
+test('handleClick with id', () => {
   const handleClickMock = jest.fn();
   render(<UserItem user={userMock} handleClick={handleClickMock} />);
 
